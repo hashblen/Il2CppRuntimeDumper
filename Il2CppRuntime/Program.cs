@@ -28,7 +28,14 @@ namespace Il2CppRuntime
                     dll.Write(newDll);
                     dllBytes = newDll.ToArray();
                 }
-                NativeNetSharp.Inject("gameprocname", dllBytes);
+                Console.Write("Enter a process name: ");
+                string processName = Console.ReadLine();
+                if (processName.EndsWith(".exe", StringComparison.OrdinalIgnoreCase))
+                {
+                    processName = processName.Substring(0, processName.Length - 4);
+                }
+                Console.WriteLine("Process name: " + processName);
+                NativeNetSharp.Inject(processName, dllBytes);
             }
             else
             {
